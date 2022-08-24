@@ -12,7 +12,7 @@ class BarangController extends Controller
 
 
         $barangSemua = Barang::all();
-        return view('barang', [
+        return view('barang.index', [
             "title" => "Barang",
             "Barang" => $barangSemua,
             "i" => 1
@@ -24,18 +24,32 @@ class BarangController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'kode' => 'required|unique',
+        $validatorData = $request->validate([
+            'kode' => 'required',
             'nama' => 'required',
             'harga' => 'required'
         ]);
 
-        $input = $request->all();
-        Barang::create($input);
+        Barang::create($validatorData);
         return redirect('/barang')->with('success', 'Barang berhasil di tambahkan');
     }
     public function create()
     {
-        return view('baranginput');
+        return view('barang.create', ["title" => "Tambah Barang"]);
+    }
+    public function update(Request $request, Barang $barang)
+    {
+        $validatorData = $request->validate([
+            'kode' => 'required',
+            'nama' => 'required',
+            'harga' => 'required'
+        ]);
+        Barang::where('id', $barang->id)->update($validatorData);
+        return redirect('/barang')->with('success', 'Barang berhasil di Update');
+    }
+
+    public function edit(Barang $barang)
+    {
+        return view('barang.edit', ['barang' => $barang, 'title' => 'Edit Barang']);
     }
 }

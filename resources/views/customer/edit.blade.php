@@ -11,21 +11,23 @@
     </div>
 </div>
 
-<form method="POST" action="/customer" class="mt-4" enctype="multipart/form-data">
+<form method="POST" action="/customer/{{ $customer->id }}" class="mt-4" enctype="multipart/form-data">
+    @method('put')
+    @csrf
     <div class="mb-3">
         <label for="kode" class="form-label">Kode Customer</label>
         <input type="text" class="form-control" id="kode" aria-describedby="kode" name="kode"
-            value="{{ old('kode') }}" required placeholder="Kode">
+            value="{{ old('kode', $customer->kode) }}" required placeholder="Kode">
     </div>
     <div class="mb-3">
         <label for="nama" class="form-label">Nama Customer</label>
         <input type="text" class="form-control" id="nama" aria-describedby="nama" name="name"
-            value="{{ old('name') }}" required placeholder="Nama">
+            value="{{ old('name', $customer->name) }}" required placeholder="Nama">
     </div>
     <div class="mb-3">
         <label for="Telepon" class="form-label">No Telepon</label>
-        <input type="Telepon" class="form-control" id="Telepon" aria-describedby="Telepon" name="tlp" placeholder="Telepon"
-            value="{{ old('tlp') }}" required>
+        <input type="Telepon" class="form-control" id="Telepon" aria-describedby="Telepon" name="telp" placeholder="Telepon"
+            value="{{ old('telp', $customer->telp) }}" required>
     </div>
 
 

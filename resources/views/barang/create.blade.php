@@ -11,7 +11,8 @@
     </div>
 </div>
 
-<form method="POST" action="/barang" class="mt-4" enctype="multipart/form-data">
+<form method="post" action="/barang" class="mt-4" enctype="multipart/form-data">
+    @csrf
     <div class="mb-3">
         <label for="kode" class="form-label">Kode Barang</label>
         <input type="text" class="form-control" id="kode" aria-describedby="kode" name="kode"

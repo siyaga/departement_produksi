@@ -3,16 +3,16 @@
 
 @section('container')
 
-{{-- @if (session()->has('success'))
+@if (session()->has('success'))
 <div class="alert alert-success">
     {{ session('success') }}
 </div>
-     --}}
+     
 @endif
 
 <!-- mainbody -->
 <h1>List Barang : </h1>
-<a href="/baranginput" class="btn btn-primary mt-3 mb-3"><i class="bi bi-plus-square"></i> Tambah Data Barang</a>
+<a href="/barang/create" class="btn btn-primary mt-3 mb-3"><i class="bi bi-plus-square"></i> Tambah Data Barang</a>
 
 
 <!-- Membuat tabel menggunakan bootstrap -->
@@ -27,32 +27,27 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-       <tr>
         @foreach ($Barang as $barang)
-            
-    
+     <tr>
+       <tr>
             <td>
                 <!-- Menambahkan update dan delete  -->
-                <a href="/databarang/edit/" class="btn btn-warning ml-1"><i
+                <a href="/barang/{{ $barang->id }}/edit" class="btn btn-warning ml-1"><i
                         class="bi bi-pencil-square"></i>
                     Update</a>
-                <a href="/databarang/delete/" class="btn btn-danger"
-                    onclick="return confirm('yakin Anda Menghapus <%=// databarang.nama %>?')"><i
-                        class="bi bi-trash-fill"></i>
-                    Delete</a>
+                
+                
             </td>
 
             <th>{{ $i++; }}</th>
             <td>{{ $barang->kode }}</td>
             <td>{{ $barang->nama }}</td>
             <td>{{ $barang->harga }}</td>
-            @endforeach
+       
         </tr>
         </tr>
-        <tr>
-
-        </tr>
+      
+        @endforeach
     </tbody>
 </table>
 

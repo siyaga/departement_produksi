@@ -40,13 +40,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                  <a class="nav-link {{ ($title ==="Barang" || $title === "Tambah Barang") ? 'active' : '' }}" href="/barang">Barang </a>
+                  <a class="nav-link {{ Request::is('barang') ? 'active' : '' }}" href="/barang">Barang </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link {{ ($title ==="Customer" || $title === "Tambah Customer") ? 'active' : '' }}" href="/customer">Customer</a>
+                  <a class="nav-link {{ Request::is('customer') ? 'active' : '' }}" href="/customer">Customer</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link {{ ($title ==="Sales" || $title === "Sales Tambah") ? 'active' : '' }}" href="/sales">Sales</a>
+                  <a class="nav-link {{ Request::is('sales') ? 'active' : '' }}" href="/sales">Sales</a>
                 </li>
               </ul>
             </div>
@@ -81,7 +81,17 @@
   var modal = $(this)
   modal.find('.modal-title').text('New message to ' + recipient)
   modal.find('.modal-body input').val(recipient)
+
+
 })
+  function update() {
+        var select = document.getElementById('selectCustomer');
+        var option = select.options[select.selectedIndex];
+
+        document.getElementById('nama').value = option.nama;
+        document.getElementById('telp').value = option.telp;
+      }
+      update();
   </script>
 </body>
 

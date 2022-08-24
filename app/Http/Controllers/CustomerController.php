@@ -15,7 +15,7 @@ class CustomerController extends Controller
     public function index()
     {
         $customer = Customer::all();
-        return view('customer', [
+        return view('customer.index', [
             "title" => "Customer",
             "Customer" => $customer,
             "i" => 1
@@ -29,7 +29,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        return view('customerinput');
+        return view('customer.create', ["title" => "Tambah Customer"]);
     }
 
     /**
@@ -40,14 +40,12 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'kode' => 'required|unique',
-            'nama' => 'required',
-            'harga' => 'required'
+        $validatorData = $request->validate([
+            'kode' => 'required',
+            'name' => 'required',
+            'telp' => 'required'
         ]);
-
-        $input = $request->all();
-        Customer::create($input);
+        Customer::create($validatorData);
         return redirect('/customer')->with('success', 'Customer berhasil di tambahkan');
     }
 
@@ -70,7 +68,7 @@ class CustomerController extends Controller
      */
     public function edit(Customer $customer)
     {
-        //
+        return view('customer.edit', ['customer' => $customer, "title" => "Edit Customer"]);
     }
 
     /**
@@ -82,7 +80,14 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $validatorData = $request->validate([
+            'kode' => 'required',
+            'name' => 'required',
+            'telp' => 'required'
+        ]);
+
+        Customer::where('id', $customer->id)->update($validatorData);
+        return redirect('/customer')->with('success', 'Customer berhasil di tambahkan');
     }
 
     /**

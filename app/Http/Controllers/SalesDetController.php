@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateSalesDetRequest;
 use App\Models\Customer;
 use App\Models\Barang;
 use App\Models\Sales;
+use Carbon\Carbon;
 
 class SalesDetController extends Controller
 {
@@ -18,15 +19,30 @@ class SalesDetController extends Controller
      */
     public function index()
     {
-
+        $datenow = Carbon::now();
         $salesDetail = SalesDet::all();
-        $salesCheck = Sales::find();
-
+        $sales = Sales::all();
+        $costume = $datenow->format('Ym');
         $customerDetail = Customer::all();
         $barang = Barang::all();
+        $salesFindId = $sales->count() + 1;
+
+        if ($salesFindId >= 10) {
+            $bilangan = "0";
+        }
+        if ($salesFindId >= 100) {
+            $bilangan = "";
+        }
+        if ($salesFindId < 10) {
+            $bilangan = "00";
+        }
+
         return view('sales_detail', [
             "title" => "Sales Tambah",
             "salesDetails" => $salesDetail,
+            "datenow" => $costume,
+            "salesFindId" => $salesFindId,
+            "bilangan" => $bilangan,
             "i" => 1,
             "Customer" => $customerDetail,
             "Barang" => $barang

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Sales;
 use App\Http\Requests\StoreSalesRequest;
 use App\Http\Requests\UpdateSalesRequest;
+use Carbon\Carbon;
 
 class SalesController extends Controller
 {
@@ -15,6 +16,7 @@ class SalesController extends Controller
      */
     public function index()
     {
+
         $sales = Sales::all();
         return view('sales', [
             "title" => "Sales",
@@ -41,7 +43,27 @@ class SalesController extends Controller
      */
     public function store(StoreSalesRequest $request)
     {
-        //
+        $request->validate([
+            'kode' => 'required',
+            'tgl' => 'required',
+            'cust_id' => 'required',
+            'subtotal' => 'required',
+            'diskon' => 'required',
+            'ongkir' => 'required',
+            'total_bayar' => 'required'
+        ]);
+        $data = $request->all();
+        $sales = new Sales();
+        $sales->kode->$data['kode'];
+        $sales->tgl->Carbon::now();
+        $sales->cust_id->$data['cust_id'];
+        $sales->subtotal->$data['subtotal'];
+        $sales->diskon->$data['diskon'];
+        $sales->ongkir->$data['ongkir'];
+        $sales->total_bayar->$data['total_bayar'];
+
+        $sales->create();
+        return redirect('/sales')->with('success', 'New post has been added!');
     }
 
     /**

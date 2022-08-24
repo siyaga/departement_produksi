@@ -2,13 +2,13 @@
 
 
 @section('container')
-<form method="post" action="{{ url('tambah_sales') }}" class="">
+<form method="post" action="/sales/add" class="">
 
     <h5>Transaksi</h5>
     <div class="form-group row ">
         <label for="staticEmail" class="col-sm-1 col-form-label">No</label>
         <div class="col-sm-1 col-md-3">
-            <input type="text" class="form-control" id="text" aria-describedby="emailHelp" placeholder="No Transaksi" name="sales_id" disabled readonly value="{{ old('sales_id') }}">
+            <input type="text" class="form-control" id="text" aria-describedby="emailHelp" placeholder="No Transaksi" name="sales_id" disabled readonly value="{{ $datenow.$bilangan.$salesFindId}}">
         </div>
       </div>
       <div class="form-group row ">
@@ -17,37 +17,38 @@
             <div class="input-group-addon">
                 <span class="glyphicon glyphicon-th"></span>
             </div>
-            <input type="date" class="form-control datepicker" id="text" aria-describedby="emailHelp" placeholder="Tanggal" name="tgl" value="{{ old('tgl') }}">
+            <input type="date" class="form-control datepicker" id="text" aria-describedby="emailHelp" placeholder="Tanggal" name="tgl" value="{{ $datenow }}">
         </div>
       </div>
       <h5>Customer</h5>
       <div class="form-group row ">
         <label for="select" class="col-sm-1 col-form-label">Kode</label>
         <div class="col-sm-1 col-md-3">
-        <select class="form-select" id="select" name="kode_customer" >
+        <select class="form-select" id="selectCustomer" name="kode_customer" onchange="update()" >
             @foreach ($Customer as $c )
             @if (old('kode_customer') === $c->kode_customer)
-            <option value="{{ $c->kode }}" selected>{{ $c->kode }}</option>
+            <option value="{{ $c->kode }}" >{{ $c->kode }}</option>
+            
             @endif
             @endforeach
 
         </select>
-
+     
         </div>
     </div>
         <div class="form-group row ">
           <label for="name" class="col-sm-1 col-form-label">Nama</label>
           <div class="col-sm-1 col-md-5">
-              <input type="text" class="form-control" id="text" aria-describedby="Nama" placeholder="Nama" name="name"  value="{{ old('name') }}">
+              <input type="text" class="form-control" id="nama" aria-describedby="Nama" placeholder="Nama" name="name"  value="{{ old('name') }}">
           </div>
         </div>
         <div class="form-group row ">
             <label for="name" class="col-sm-1 col-form-label">Telp</label>
             <div class="col-sm-1 col-md-3">
-                <input type="text" class="form-control" id="text" aria-describedby="noTelp" placeholder="No Telephone" name="telp" value="{{ old('telp') }}">
+                <input type="text" class="form-control" id="telp" aria-describedby="noTelp" placeholder="No Telephone" name="telp" value="{{ old('telp') }}">
             </div>
           </div>
-  
+      
 
 <!-- mainbody -->
 <h1>List Detail Sales : </h1>

@@ -28,6 +28,9 @@ Route::get('/customerinput', function () {
         "title" => "Tambah Customer",
     ]);
 });
+
+// Route::get('/barang', [BarangController::class, 'index']);
+// Route::post('/barang', [BarangController::class, 'store']);
 Route::resource('/barang', BarangController::class);
 Route::resource('/customer', CustomerController::class);
 
